@@ -1,0 +1,37 @@
+package exercise;
+
+public class Producer extends Thread {
+	
+	private LoadHandler loadHandler;
+	
+	public Producer(LoadHandler loadHandler) {
+		this.loadHandler = loadHandler;
+	}
+	
+	@Override
+	public void run() {
+		generateUpdates();
+	}
+	
+	public void generateUpdates(){
+		for (int i = 1; i < 2; i++) {
+			loadHandler.receive(new PriceUpdate("Apple", 97.85));
+			loadHandler.receive(new PriceUpdate("Google", 160.61));
+			loadHandler.receive(new PriceUpdate("Samsung", 93.12));
+			loadHandler.receive(new PriceUpdate("Facebook", 91.66));
+			loadHandler.receive(new PriceUpdate("Google", 160.73));
+			loadHandler.receive(new PriceUpdate("Facebook", 91.71));
+			loadHandler.receive(new PriceUpdate("Samsung", 92.12));
+			loadHandler.receive(new PriceUpdate("Google", 160.76));
+			loadHandler.receive(new PriceUpdate("Apple", 97.84));
+			loadHandler.receive(new PriceUpdate("Google", 160.85));
+			loadHandler.receive(new PriceUpdate("Facebook", 91.86));
+			loadHandler.receive(new PriceUpdate("Samsung", 91.12));
+
+
+		}
+		// Once updates are over, set completed flag to true
+		SendUpdate.setUPDATES_COMPLETED(true);
+	}
+
+}
